@@ -4,7 +4,7 @@
 #
 Name     : menu-cache
 Version  : 1.1.0
-Release  : 1
+Release  : 2
 URL      : https://github.com/lxde/menu-cache/archive/1.1.0.tar.gz
 Source0  : https://github.com/lxde/menu-cache/archive/1.1.0.tar.gz
 Summary  : Caching mechanism for freedesktop.org compliant menus
@@ -20,6 +20,7 @@ BuildRequires : libfm-dev
 BuildRequires : libxslt-bin
 BuildRequires : pkgconfig(gio-2.0)
 BuildRequires : pkgconfig(glib-2.0)
+BuildRequires : pkgconfig(libfm-extra)
 
 %description
 Libmenu-cache is a library creating and utilizing caches to speed up
@@ -31,6 +32,7 @@ Summary: dev components for the menu-cache package.
 Group: Development
 Requires: menu-cache-lib = %{version}-%{release}
 Provides: menu-cache-devel = %{version}-%{release}
+Requires: menu-cache = %{version}-%{release}
 
 %description dev
 dev components for the menu-cache package.
@@ -71,7 +73,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549292272
+export SOURCE_DATE_EPOCH=1557095667
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %autogen --disable-static
 make  %{?_smp_mflags}
 
@@ -83,7 +92,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1549292272
+export SOURCE_DATE_EPOCH=1557095667
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/menu-cache
 cp COPYING %{buildroot}/usr/share/package-licenses/menu-cache/COPYING
