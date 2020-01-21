@@ -4,10 +4,10 @@
 #
 Name     : menu-cache
 Version  : 1.1.0
-Release  : 2
+Release  : 3
 URL      : https://github.com/lxde/menu-cache/archive/1.1.0.tar.gz
 Source0  : https://github.com/lxde/menu-cache/archive/1.1.0.tar.gz
-Summary  : Caching mechanism for freedesktop.org compliant menus
+Summary  : Cache for freedesktop.org menu spec
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: menu-cache-lib = %{version}-%{release}
@@ -67,13 +67,15 @@ license components for the menu-cache package.
 
 %prep
 %setup -q -n menu-cache-1.1.0
+cd %{_builddir}/menu-cache-1.1.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557095667
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1579646338
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -85,17 +87,17 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557095667
+export SOURCE_DATE_EPOCH=1579646338
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/menu-cache
-cp COPYING %{buildroot}/usr/share/package-licenses/menu-cache/COPYING
+cp %{_builddir}/menu-cache-1.1.0/COPYING %{buildroot}/usr/share/package-licenses/menu-cache/a222eb7a5344a5c487bd633a6eb5810028d5a74e
 %make_install
 
 %files
@@ -119,4 +121,4 @@ cp COPYING %{buildroot}/usr/share/package-licenses/menu-cache/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/menu-cache/COPYING
+/usr/share/package-licenses/menu-cache/a222eb7a5344a5c487bd633a6eb5810028d5a74e
