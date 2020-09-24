@@ -4,7 +4,7 @@
 #
 Name     : menu-cache
 Version  : 1.1.0
-Release  : 3
+Release  : 4
 URL      : https://github.com/lxde/menu-cache/archive/1.1.0.tar.gz
 Source0  : https://github.com/lxde/menu-cache/archive/1.1.0.tar.gz
 Summary  : Cache for freedesktop.org menu spec
